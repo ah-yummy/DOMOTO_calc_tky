@@ -66,7 +66,7 @@
     <div class="tax-note">※すべて税込価格</div>
     <div id="list"></div>
     <div class="footer-container">
-        <div>※東京ドームコラボTシャツは購入特典対象外です。</div>
+        <div>※東京ドームコラボTシャツは購入特典の加算対象外です。</div>
         <div class="watermark">X：@ah_yummy</div>
     </div>
     <div id="bar">
@@ -115,13 +115,13 @@
                 if (only && qty[i] == 0) return;
                 let d = document.createElement("div");
                 d.className = "card";
-                d.innerHTML = `<b><a href="${it[4]}" target="_blank" rel="noopener noreferrer" class="item-link">${it[0]}</a></b><div class=row><div class=price-area><div class=price>${fmt(it[1])}</div>${it[3] ? '<span class=badge>特典対象外</span>' : ''}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" aria-label="数量を減らす" ${qty[i] == 0 ? 'disabled' : ''} onclick='chg(${i},-1)'>−</button><div class="qty-val ${qty[i] == 0 ? 'qty-zero' : 'qty-active'}">${qty[i]}</div><button class="qty-btn" aria-label="数量を増やす" ${qty[i] >= it[2] ? 'disabled' : ''} onclick='chg(${i},1)'>＋</button></div></div>`;
+                d.innerHTML = `<b><a href="${it[4]}" target="_blank" rel="noopener noreferrer" class="item-link">${it[0]}</a></b><div class=row><div class=price-area><div class=price>${fmt(it[1])}</div>${it[3] ? '<span class=badge>購入特典の加算対象外</span>' : ''}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" aria-label="数量を減らす" ${qty[i] == 0 ? 'disabled' : ''} onclick='chg(${i},-1)'>−</button><div class="qty-val ${qty[i] == 0 ? 'qty-zero' : 'qty-active'}">${qty[i]}</div><button class="qty-btn" aria-label="数量を増やす" ${qty[i] >= it[2] ? 'disabled' : ''} onclick='chg(${i},1)'>＋</button></div></div>`;
                 listEl.appendChild(d);
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
             
-            barLeftEl.innerHTML = `<div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">¥${next.toLocaleString()}</span></div>`;
+            barLeftEl.innerHTML = `<div class=info-row><div class=info-label><span class=label-text>🎁 購入特典</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">¥${next.toLocaleString()}</span></div>`;
             totalValEl.innerText = fmt(total);
         }
         function chg(i, d) {
