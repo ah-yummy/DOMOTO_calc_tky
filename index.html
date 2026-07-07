@@ -89,7 +89,17 @@
             ["【東京ドームコラボ】Tシャツ BLACK", 6000, 2, true, "https://mitsui-shopping-park.com/ec/p/6260600000036?mallColor=0101"],
             ["【東京ドームコラボ】Tシャツ WHITE", 6000, 2, true, "https://mitsui-shopping-park.com/ec/p/6260600000037?mallColor=0201"]
         ];
-        let qty = JSON.parse(localStorage.getItem('goodsQty')) || Array(items.length).fill(0);
+        
+        let qty;
+        try {
+            qty = JSON.parse(localStorage.getItem("goodsQty"));
+        } catch {
+            qty = null;
+        }
+        if (!Array.isArray(qty) || qty.length !== items.length) {
+            qty = Array(items.length).fill(0);
+        }
+
         const fmt = n => "¥" + n.toLocaleString();
         function draw() {
             let l = list;
