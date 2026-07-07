@@ -10,8 +10,10 @@
         .controls { padding: 12px; display: flex; justify-content: space-between; align-items: center; }
         .reset-btn { height: 40px; padding: 0 20px; border-radius: 20px; border: none; background: rgba(255,255,255,.92); box-shadow: 0 2px 6px rgba(0,0,0,.12); cursor: pointer; }
         .card { background: rgba(255, 255, 255, 0.7); margin: 10px; border-radius: 16px; padding: 14px; backdrop-filter: blur(5px); }
-        .row { display: flex; justify-content: space-between; align-items: center; }
-        .qty-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,.92); cursor: pointer; }
+        .row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+        .qty-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,.92); cursor: pointer; font-size: 20px; font-weight: bold; }
+        .qty-val { font-size: 24px; font-weight: 800; width: 40px; text-align: center; color: #d91e18; transition: transform 0.1s; }
+        .qty-pop { transform: scale(1.5); }
         .item-link { color: #000; text-decoration: underline; font-weight: bold; }
         
         #bar { 
@@ -19,10 +21,9 @@
             background: #d91e18; color: #fff; height: 70px; 
             display: grid; grid-template-columns: 1fr auto; align-items: center; 
             padding: 0 15px; box-sizing: border-box; border-radius: 12px;
+            white-space: nowrap;
         }
-        
-        .bar-left { font-size: 11px; font-weight: bold; white-space: nowrap; }
-        
+        .bar-left { font-size: 11px; font-weight: bold; overflow: hidden; }
         .bar-right { display: flex; align-items: center; justify-content: flex-end; }
         .total-label { font-size: 14px; font-weight: bold; margin-right: 20px; }
         .total-val { font-size: 26px; font-weight: 800; text-align: right; width: 140px; }
@@ -68,14 +69,27 @@
                 if (filter.checked && qty[i] == 0) return;
                 let d = document.createElement("div");
                 d.className = "card";
-                d.innerHTML = `<a href="${it[4]}" target="_blank" class="item-link">${it[0]}</a><div class=row><div>¥${it[1].toLocaleString()}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" onclick='chg(${i},-1)'>−</button><div style="width:30px;text-align:center;font-weight:800;">${qty[i]}</div><button class="qty-btn" onclick='chg(${i},1)'>＋</button></div></div>`;
+                d.innerHTML = `<a href="${it[4]}" target="_blank" class="item-link">${it[0]}</a><div class=row><div>¥${it[1].toLocaleString()}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" onclick='chg(${i},-1)'>−</button><div class="qty-val">${qty[i]}</div><button class="qty-btn" onclick='chg(${i},1)'>＋</button></div></div>`;
                 l.appendChild(d);
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             barInfo.innerHTML = `<div>🎁 特典：${t}セット</div><div>✨️ あと：¥${next.toLocaleString()}</div>`;
             totalVal.innerText = "¥" + total.toLocaleString();
         }
-        function chg(i, d) { qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d)); localStorage.setItem('goodsQty', JSON.stringify(qty)); draw(); }
+        function chg(i, d) { 
+            qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d)); 
+            localStorage.setItem('goodsQty', JSON.stringify(qty)); 
+            draw();
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    const vals = document.querySelectorAll(".qty-val");
+                    if (vals[i]) {
+                        vals[i].classList.add("qty-pop");
+                        setTimeout(() => { vals[i].classList.remove("qty-pop"); }, 150);
+                    }
+                });
+            });
+        }
         function resetAll() { qty.fill(0); localStorage.removeItem('goodsQty'); draw(); }
         filter.onchange = draw; draw();
     </script>
