@@ -105,13 +105,15 @@
             localStorage.setItem('goodsQty', JSON.stringify(qty));
             draw();
             requestAnimationFrame(() => {
-                const vals = document.querySelectorAll(".qty-val");
-                if (vals[i]) {
-                    vals[i].classList.add("qty-pop");
-                    setTimeout(() => {
-                        vals[i].classList.remove("qty-pop");
-                    }, 150);
-                }
+                requestAnimationFrame(() => {
+                    const vals = document.querySelectorAll(".qty-val");
+                    if (vals[i]) {
+                        vals[i].classList.add("qty-pop");
+                        setTimeout(() => {
+                            vals[i].classList.remove("qty-pop");
+                        }, 150);
+                    }
+                });
             });
         }
         function resetAll() { qty.fill(0); localStorage.removeItem('goodsQty'); draw(); }
