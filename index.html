@@ -32,11 +32,11 @@
         #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; display: flex; align-items: center; height: 70px; }
         .bar-left { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding-left: 20px; }
         .info-row { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
-        .info-label { width: 130px; flex-shrink: 0; display: flex; justify-content: space-between; }
+        /* 特典のラベル幅を広げて改行を防ぎます */
+        .info-label { width: 145px; flex-shrink: 0; display: flex; justify-content: space-between; }
         
         .bar-right { width: 220px; font-weight: bold; text-align: right; padding-right: 20px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; }
         .total-area { display: flex; width: 160px; justify-content: space-between; align-items: center; }
-        /* 3文字分(約45px)ほど左側に余白を設けて「合計」を右へ押し出す */
         .total-label { font-size: 12px; padding-left: 45px; }
         .total-val { font-size: 18px; }
 
