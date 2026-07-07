@@ -40,10 +40,9 @@
         .info-row { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
         .info-label { width: 130px; flex-shrink: 0; display: flex; justify-content: space-between; }
         .label-text { white-space: nowrap; }
-        .bar-right { width: 220px; display: flex; justify-content: flex-end; align-items: center; padding-right: 20px; }
-        .total-area { display: flex; align-items: baseline; gap: 10px; }
-        .total-label { font-size: 14px; font-weight: bold; padding-top: 4px; }
-        .total-val { font-size: 30px; font-weight: 800; line-height: 1; }
+        .bar-right { display: flex; align-items: baseline; gap: 8px; padding-right: 16px; }
+        .total-label { font-size: 14px; font-weight: bold; }
+        .total-val { font-size: 26px; font-weight: 800; }
         .footer-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 5px 10px; font-size: 12px; color: #666; }
         .watermark { opacity: 0.2; font-size: 10px; font-weight: 500; }
     </style>
@@ -68,16 +67,16 @@
     <script>
         const items = [
             ["フォトパンフ", 3500, 2, false, "https://store.domotofc.jp/detail.php?goods_id=24"],
-            ["ポリうちわ", 1300, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=15"],
-            ["ハンドタオル", 1900, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=16"],
-            ["アクリルスタンド（全3種類）", 1400, 5, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=25"],
-            ["アクリルスタンド（コンプリートセット）", 4900, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=23"],
-            ["ビッグシルエットTシャツ", 6000, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=12"],
-            ["メタリックトート（2way）", 3900, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=17"],
-            ["マルチストラップ", 2400, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=18"],
-            ["ハンディファン", 5100, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=19"],
-            ["ペンライト", 5800, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=20"],
-            ["チケットキーホルダー（東京会場Ver.）", 1000, 2, false, "https://store.domotofc.jp/detail.php?order=new_desc&goods_id=21"],
+            ["ポリうちわ", 1300, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=15"],
+            ["ハンドタオル", 1900, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=16"],
+            ["アクリルスタンド（全3種類）", 1400, 5, false, "https://store.domotofc.jp/order=new_desc&goods_id=25"],
+            ["アクリルスタンド（コンプリートセット）", 4900, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=23"],
+            ["ビッグシルエットTシャツ", 6000, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=12"],
+            ["メタリックトート（2way）", 3900, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=17"],
+            ["マルチストラップ", 2400, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=18"],
+            ["ハンディファン", 5100, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=19"],
+            ["ペンライト", 5800, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=20"],
+            ["チケットキーホルダー（東京会場Ver.）", 1000, 2, false, "https://store.domotofc.jp/order=new_desc&goods_id=21"],
             ["【東京ドームコラボ】Tシャツ BLACK", 6000, 2, true, "https://mitsui-shopping-park.com/ec/p/6260600000036?mallColor=0101"],
             ["【東京ドームコラボ】Tシャツ WHITE", 6000, 2, true, "https://mitsui-shopping-park.com/ec/p/6260600000037?mallColor=0201"]
         ];
@@ -98,7 +97,7 @@
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
-            bar.innerHTML = `<div class=bar-left><div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span>：</span></div><span style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span>：</span></div><span style="white-space:nowrap">¥${next.toLocaleString()}</span></div></div><div class=bar-right><div class=total-area><div class=total-label>合計</div><div class=total-val>${fmt(total)}</div></div></div>`;
+            bar.innerHTML = `<div class=bar-left><div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span>：</span></div><span style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span>：</span></div><span style="white-space:nowrap">¥${next.toLocaleString()}</span></div></div><div class=bar-right><div class=total-label>合計</div><div class=total-val>${fmt(total)}</div></div>`;
         }
         function chg(i, d) {
             qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d));
