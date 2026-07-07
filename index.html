@@ -35,14 +35,19 @@
         .slider:before { content: ""; position: absolute; width: 18px; height: 18px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.3s; }
         input:checked + .slider { background: #0066ff; }
         input:checked + .slider:before { transform: translateX(18px); }
-        #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; display: flex; align-items: center; height: 70px; }
-        .bar-left { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding-left: 20px; }
+        
+        /* 改修：バー全体のレイアウト */
+        #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; height: 70px; display: flex; align-items: center; padding: 0 15px; }
+        .bar-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        /* 左側エリア：ラベルと値の配置を厳密に固定 */
+        .bar-left { display: flex; flex-direction: column; gap: 2px; }
         .info-row { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
-        .info-label { width: 125px; flex-shrink: 0; display: flex; justify-content: space-between; }
-        .label-text { white-space: nowrap; }
-        .bar-right { display: flex; align-items: baseline; padding-right: 16px; width: 230px; justify-content: flex-end; }
-        .total-label { font-size: 14px; font-weight: bold; width: 40px; text-align: right; }
-        .total-val { font-size: 26px; font-weight: 800; width: 150px; text-align: right; }
+        .label-box { width: 125px; display: flex; justify-content: space-between; flex-shrink: 0; }
+        /* 右側エリア：合計ラベルと金額を独立した箱に */
+        .bar-right { display: flex; align-items: center; gap: 5px; }
+        .total-label { font-size: 14px; font-weight: bold; width: 35px; text-align: center; }
+        .total-val { font-size: 26px; font-weight: 800; width: 140px; text-align: right; }
+        
         .footer-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 5px 10px; font-size: 12px; color: #666; }
         .watermark { opacity: 0.2; font-size: 10px; font-weight: 500; }
     </style>
@@ -63,7 +68,9 @@
         <div>※東京ドームコラボTシャツは購入特典対象外です。</div>
         <div class="watermark">X：@ah_yummy</div>
     </div>
-    <div id="bar"></div>
+    <div id="bar">
+        <div class="bar-inner" id="barContent"></div>
+    </div>
     <script>
         const items = [
             ["フォトパンフ", 3500, 2, false, "https://store.domotofc.jp/detail.php?goods_id=24"],
@@ -97,7 +104,9 @@
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
-            bar.innerHTML = `<div class=bar-left><div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span>：</span></div><span style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span>：</span></div><span style="white-space:nowrap">¥${next.toLocaleString()}</span></div></div><div class=bar-right><div class=total-label>合計</div><div class=total-val>${fmt(total)}</div></div>`;
+            
+            // 内部のHTMLをラベルと値のコンテナで固定
+            barContent.innerHTML = `<div class=bar-left><div class=info-row><div class=label-box><span>🎁 特典</span><span>：</span></div><span>${t}セット</span></div><div class=info-row><div class=label-box><span>✨️ 次の特典まであと</span><span>：</span></div><span>¥${next.toLocaleString()}</span></div></div><div class=bar-right><div class=total-label>合計</div><div class=total-val>${fmt(total)}</div></div>`;
         }
         function chg(i, d) {
             qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d));
