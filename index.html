@@ -37,21 +37,16 @@
         input:checked + .slider:before { transform: translateX(18px); }
         
         #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; height: 70px; display: flex; align-items: center; padding: 0 20px; box-sizing: border-box; }
+        .bar-left { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+        .info-row { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
+        /* ラベル幅を固定し、コロンを右寄せする */
+        .info-label { width: 140px; display: flex; justify-content: space-between; padding-right: 5px; }
         
-        /* ラベル固定用のコンテナ */
-        .bar-content { position: relative; width: 100%; height: 100%; display: flex; align-items: center; }
+        /* 合計ラベルをabsoluteで絶対座標固定 */
+        .bar-right { position: relative; width: 140px; height: 70px; }
+        .total-label { position: absolute; left: 0; top: 25px; font-size: 12px; font-weight: bold; }
+        .total-val { position: absolute; right: 0; top: 20px; font-size: 21px; font-weight: 800; }
         
-        /* 絶対配置のラベル */
-        .lbl { position: absolute; font-size: 12px; font-weight: bold; white-space: nowrap; }
-        .lbl-toku { left: 0; top: 18px; }
-        .lbl-tsugi { left: 0; top: 38px; }
-        .lbl-total { right: 180px; top: 26px; } /* 合計の「合計」文字を固定 */
-        
-        /* 数値表示用エリア（ラベルと被らないように配置） */
-        .val-set { position: absolute; left: 140px; top: 18px; font-weight: bold; font-size: 12px; }
-        .val-next { position: absolute; left: 140px; top: 38px; font-weight: bold; font-size: 12px; }
-        .val-total { position: absolute; right: 20px; top: 22px; font-weight: 800; font-size: 21px; }
-
         .footer-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 5px 10px; font-size: 12px; color: #666; }
         .watermark { opacity: 0.2; font-size: 10px; font-weight: 500; }
     </style>
@@ -73,7 +68,8 @@
         <div class="watermark">X：@ah_yummy</div>
     </div>
     <div id="bar">
-        <div class="bar-content" id="bar-inner"></div>
+        <div class="bar-left" id="bar-left-content"></div>
+        <div class="bar-right"><div class="total-label">合計</div><div class="total-val" id="total-val-content"></div></div>
     </div>
     <script>
         const items = [
@@ -108,7 +104,9 @@
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
-            document.getElementById('bar-inner').innerHTML = `<div class="lbl lbl-toku">🎁 特典　　　　：</div><div class="val-set">${t}セット</div><div class="lbl lbl-tsugi">✨️ 次の特典まであと：</div><div class="val-next">¥${next.toLocaleString()}</div><div class="lbl lbl-total">合計</div><div class="val-total">${fmt(total)}</div>`;
+            
+            document.getElementById('bar-left-content').innerHTML = `<div class=info-row><div class=info-label><span>🎁 特典</span><span>：</span></div><span style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span>✨️ 次の特典まであと</span><span>：</span></div><span style="white-space:nowrap">¥${next.toLocaleString()}</span></div>`;
+            document.getElementById('total-val-content').innerText = fmt(total);
         }
         function chg(i, d) {
             qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d));
