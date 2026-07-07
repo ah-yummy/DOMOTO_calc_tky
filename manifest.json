@@ -1,1 +1,16 @@
+{
+  "name": "グッズの計算機",
+  "short_name": "計算機",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0066ff",
+  "icons": [
+    {
+      "src": "DOMOTOfavicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
 
