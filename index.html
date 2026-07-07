@@ -40,10 +40,10 @@
         .bar-left { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 2px; }
         .info-row { display: flex; align-items: center; font-size: 12px; font-weight: bold; }
         
-        /* ラベル幅固定。コロンを少し左（margin-right: 5px）に動かし、右の数値は絶対位置でガード */
         .info-label { width: 140px; display: flex; justify-content: flex-end; align-items: center; }
         .label-text { margin-right: auto; }
-        .colon { margin-right: 5px; } /* これを調整してコロンの位置を制御 */
+        /* コロンの位置をさらに5ポイント左へ移動（margin-rightを10pxに増加） */
+        .colon { margin-right: 10px; } 
         
         .bar-right { position: relative; width: 140px; height: 70px; }
         .total-label { position: absolute; left: 5px; top: 25px; font-size: 12px; font-weight: bold; }
