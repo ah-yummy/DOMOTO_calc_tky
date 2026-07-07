@@ -42,8 +42,10 @@
         
         .info-label { width: 140px; display: flex; justify-content: flex-end; align-items: center; }
         .label-text { margin-right: auto; }
-        /* コロンの位置をさらに5ポイント左へ移動（margin-rightを10pxに増加） */
-        .colon { margin-right: 10px; } 
+        /* 「：」をさらに5pt左へ移動（margin-rightを15pxへ増加） */
+        .colon { margin-right: 15px; } 
+        /* 数値を10pt左へ移動（margin-leftを-10pxへ設定）と、フォントサイズを2pt大きく（12pt -> 14pt） */
+        .val-text { margin-left: -10px; font-size: 14px; }
         
         .bar-right { position: relative; width: 140px; height: 70px; }
         .total-label { position: absolute; left: 5px; top: 25px; font-size: 12px; font-weight: bold; }
@@ -107,7 +109,7 @@
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
             
-            document.getElementById('bar-left-content').innerHTML = `<div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span class=colon>：</span></div><span style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span class=colon>：</span></div><span style="white-space:nowrap">¥${next.toLocaleString()}</span></div>`;
+            document.getElementById('bar-left-content').innerHTML = `<div class=info-row><div class=info-label><span class=label-text>🎁 特典</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">${t}セット</span></div><div class=info-row><div class=info-label><span class=label-text>✨️ 次の特典まであと</span><span class=colon>：</span></div><span class="val-text" style="white-space:nowrap">¥${next.toLocaleString()}</span></div>`;
             document.getElementById('total-val-content').innerText = fmt(total);
         }
         function chg(i, d) {
