@@ -29,10 +29,10 @@
         input:checked + .slider { background: #0066ff; }
         input:checked + .slider:before { transform: translateX(18px); }
 
-        #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; padding: 4px 8px; box-shadow: 0 -2px 8px rgba(0, 0, 0, .25); display: flex; flex-direction: column; height: 70px; justify-content: center; font-size: 12px; }
-        .bar-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-        .bar-bottom { display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-        .total-label { font-size: 14px; }
+        #bar { position: fixed; left: 0; right: 0; bottom: 0; background: #d91e18; color: #fff; padding: 0 10px; box-shadow: 0 -2px 8px rgba(0, 0, 0, .25); display: flex; align-items: center; height: 70px; justify-content: space-between; }
+        .bar-left { display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%; font-size: 11px; overflow: hidden; }
+        .bar-right { display: flex; align-items: center; justify-content: flex-end; font-weight: bold; flex-shrink: 0; }
+        .total-wrapper { display: flex; align-items: center; gap: 6px; }
         .total-val { font-size: 18px; }
 
         .footer-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 5px 10px; font-size: 12px; color: #666; }
@@ -96,7 +96,7 @@
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
             if (target > 0 && target % 15000 == 0) next = 15000;
-            bar.innerHTML = `<div class=bar-top><div>🎁 特典：${t}セット</div><div>✨️ 次の特典まであと：¥${next.toLocaleString()}</div></div><div class=bar-bottom><div class=total-label>💴 合計</div><div class=total-val>${fmt(total)}</div></div>`;
+            bar.innerHTML = `<div class=bar-left><div>🎁 特典：${t}セット</div><div>✨️ 次の特典まであと：¥${next.toLocaleString()}</div></div><div class=bar-right><div class=total-wrapper><span>💴 合計</span><span class=total-val>${fmt(total)}</span></div></div>`;
         }
 
         function chg(i, d) { qty[i] = Math.max(0, Math.min(items[i][2], qty[i] + d)); draw(); }
