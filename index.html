@@ -101,7 +101,7 @@
                 if (only && qty[i] == 0) return;
                 let d = document.createElement("div");
                 d.className = "card";
-                d.innerHTML = `<b><a href="${it[4]}" target="_blank" class="item-link">${it[0]}</a></b><div class=row><div class=price-area><div class=price>${fmt(it[1])}</div>${it[3] ? '<span class=badge>特典対象外</span>' : ''}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" ${qty[i] == 0 ? 'disabled' : ''} onclick='chg(${i},-1)'>−</button><div class="qty-val ${qty[i] == 0 ? 'qty-zero' : 'qty-active'}">${qty[i]}</div><button class="qty-btn" ${qty[i] >= it[2] ? 'disabled' : ''} onclick='chg(${i},1)'>＋</button></div></div>`;
+                d.innerHTML = `<b><a href="${it[4]}" target="_blank" rel="noopener noreferrer" class="item-link">${it[0]}</a></b><div class=row><div class=price-area><div class=price>${fmt(it[1])}</div>${it[3] ? '<span class=badge>特典対象外</span>' : ''}</div><div style="display:flex; align-items:center; gap:8px;"><button class="qty-btn" ${qty[i] == 0 ? 'disabled' : ''} onclick='chg(${i},-1)'>−</button><div class="qty-val ${qty[i] == 0 ? 'qty-zero' : 'qty-active'}">${qty[i]}</div><button class="qty-btn" ${qty[i] >= it[2] ? 'disabled' : ''} onclick='chg(${i},1)'>＋</button></div></div>`;
                 l.appendChild(d);
             });
             let t = Math.floor(target / 15000), next = 15000 - target % 15000;
