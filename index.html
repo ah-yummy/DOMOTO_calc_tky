@@ -19,10 +19,31 @@
         .controls { padding: 12px; display: flex; align-items: center; gap: 8px; }
         .segment-container { display: flex; gap: 8px; margin-left: auto; }
         
-        .segment-btn { height: 40px; padding: 0 16px; min-width: 100px; border-radius: 20px; border: none; background: #ccc; color: #777; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease; box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.9); display: flex; align-items: center; justify-content: center; }
+        .segment-btn {
+            height: 40px;
+            width: 120px;
+            padding: 0;
+            border-radius: 20px;
+            border: none;
+            background: #ccc;
+            color: #777;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .segment-btn:active { transform: scale(.94); box-shadow: inset 0 2px 6px rgba(0,0,0,.15); }
         .segment-btn.active { background: #fff; color: #000; box-shadow: inset 0 2px 5px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.08); transform: translateY(1px); }
-        .check { margin-right: 5px; }
+        
+        .check {
+            display: inline-block;
+            width: 14px;
+            margin-right: 5px;
+        }
         
         .reset-btn { height: 40px; padding: 0 20px; border-radius: 20px; border: none; background: rgba(255,255,255,.92); box-shadow: 0 2px 6px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.9); color: #333; font-size: 15px; font-weight: 600; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
         .reset-btn:active { transform: scale(.94); box-shadow: inset 0 2px 6px rgba(0,0,0,.15); }
@@ -119,10 +140,10 @@
             const btnO = document.getElementById("seg-osaka");
             
             btnT.className = "segment-btn" + (activeSegs.tokyo ? " active" : "");
-            btnT.innerHTML = (activeSegs.tokyo ? '<span class="check">✓</span>' : '') + "東京会場";
+            btnT.innerHTML = (activeSegs.tokyo ? '<span class="check">✓</span>' : '<span class="check"></span>') + "東京会場";
             
             btnO.className = "segment-btn" + (activeSegs.osaka ? " active" : "");
-            btnO.innerHTML = (activeSegs.osaka ? '<span class="check">✓</span>' : '') + "大阪会場";
+            btnO.innerHTML = (activeSegs.osaka ? '<span class="check">✓</span>' : '<span class="check"></span>') + "大阪会場";
             
             const listEl = document.getElementById("list");
             listEl.innerHTML = "";
